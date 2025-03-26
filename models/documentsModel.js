@@ -26,18 +26,18 @@ const Document = {
     return rows;
   },
 
-  create: async ({ projectid, investorid, producersid, fimename, filetype, createddate, updateddate }) => {
+  create: async ({ projectid, investorid, producersid, filename, filetype, createddate, updateddate }) => {
     const { rows } = await pool.query(
-      "INSERT INTO documents (projectid, investorid, producersid, fimename, filetype, createddate, updateddate) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [projectid, investorid, producersid, fimename, filetype, createddate, updateddate]
+      "INSERT INTO documents (projectid, investorid, producersid, filename, filetype, createddate, updateddate) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      [projectid, investorid, producersid, filename, filetype, createddate, updateddate]
     );
     return rows[0];
   },
 
-  update: async (documentid, { fimename, filetype, updateddate }) => {
+  update: async (documentid, { filename, filetype, updateddate }) => {
     const { rows } = await pool.query(
-      "UPDATE documents SET fimename = $1, filetype = $2, updateddate = $3 WHERE documentid = $4 RETURNING *",
-      [fimename, filetype, updateddate, documentid]
+      "UPDATE documents SET filename = $1, filetype = $2, updateddate = $3 WHERE documentid = $4 RETURNING *",
+      [filename, filetype, updateddate, documentid]
     );
     return rows[0];
   },
